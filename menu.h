@@ -7,19 +7,17 @@
 /*  MODULE NAME           :  menu                                                                 */
 /*  LANGUAGE              :  C                                                                    */
 /*  TARGET ENVIRONMENT    :  ANY                                                                  */
-/*  DATE OF FIRST RELEASE :  2014/09/19                                                           */
+/*  DATE OF FIRST RELEASE :  2014/09/25                                                           */
 /*  DESCRIPTION           :  This is a menu interface head file                                   */
 /**************************************************************************************************/
 
 /*
  * Revision log:
  *
- * Created by RootAmaris, 2014/09/19
+ * Created by RootAmaris, 2014/09/25
  * 
  */
 
-/*command node struct*/
-typedef struct CmdNode tCmdNode;
 
 /*menu struct*/
 typedef struct Menu tMenu;

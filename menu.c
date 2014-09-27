@@ -48,46 +48,42 @@ int AddCommand(tMenu *pMenu, char* pCommand, char* pDesc, int (*pOpt)())
     return SUCCESS;
 }
 
-/*print all commands in menu on screen*/
-int ShowAllCommand(tMenu *pMenu)
-{
-    if(pMenu == NULL)
-    {
-        return FAILURE;
-    }
-    return SUCCESS;
-}
-
-/*print all commands and their functions on screen*/
-int ShowAllInformation(tMenu *pMenu)
-{
-    if(pMenu == NULL)
-    {
-        return FAILURE;
-    }
-    return SUCCESS;
-}
-
 /*start the menu program*/
 int MenuStart(tMenu *pMenu)
 {
-
+    if(pMenu == NULL)
+    {
+        return FAILURE;
+    }
+    return SUCCESS;
 }
 
 /*stop the menu program*/
 int MenuStop(tMenu *pMenu)
 {
-
+    if(pMenu == NULL)
+    {
+        return FAILURE;
+    }
+    return SUCCESS;
 }
 
 /*delete command named pCommand*/
 int DeleteCommand(tMenu *pMenu, char* pCommand)
 {
-
+    if(pMenu == NULL || pCommand == NULL)
+    {
+        return FAILURE;
+    }
+    return SUCCESS;
 }
 
 /*delete menu*/
 int DeleteMenu(tMenu *pMenu)
 {
-
+    if(pMenu == NULL)
+    {
+        return FAILURE;
+    }
+    return SUCCESS;
 }

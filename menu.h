@@ -28,20 +28,11 @@ tMenu* CreateMenu();
 /*add a command into menu*/
 int AddCommand(tMenu *pMenu, char* pCommand, char* pDesc, int (*pOpt)());
 
-/*print all commands in menu on screen*/
-int ShowAllCommand(tMenu *pMenu);
-
-/*print all commands and their functions on screen*/
-int ShowAllInformation(tMenu *pMenu);
-
 /*start the menu program*/
 int MenuStart(tMenu *Menu);
 
 /*stop the menu program*/
 int MenuStop(tMenu *pMenu);
-
-/*delete command named pCommand*/
-int DeleteCommand(tMenu *pMenu, char* pCommand);
 
 /*delete menu*/
 int DeleteMenu(tMenu *pMenu);

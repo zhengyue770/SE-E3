@@ -22,7 +22,10 @@
 #include <stdlib.h>
 #include "menu.h"
 #include "linkTable.h"
+
 #define CMD_MAX_LEN 128
+#define FAILURE -1
+#define SUCCESS 0
 
 int out = 0;
 char pInputCmd[CMD_MAX_LEN];
@@ -47,6 +50,10 @@ struct Menu
 tMenu* CreateMenu()
 {
     tMenu *pNewMenu = (tMenu*)malloc(sizeof(tMenu));
+    if(pNewMenu == NULL)
+    {
+        return NULL;
+    }
     tLinkTable *pNewLinkTable = CreateLinkTable();
     pNewMenu->pMenuHead = pNewLinkTable;
     return pNewMenu;
@@ -76,10 +83,10 @@ int AddCommand(tMenu *pMenu, char* pCommand, char* pDesc, int (*pOpt)())
 {
     if(pMenu == NULL || pCommand == NULL || pDesc == NULL)
     {
-        return -1;
+        return FAILURE;
     }
     AddLinkNode(pMenu->pMenuHead, (tLinkNode *)CreateCmdNode(pCommand, pDesc, pOpt));
-    return 0;
+    return SUCCESS;
 }
 
 /*print all commands in menu on screen*/
@@ -87,13 +94,13 @@ int ShowAllCommand(tMenu *pMenu)
 {
     if(pMenu == NULL)
     {
-        return -1;
+        return FAILURE;
     }
     tLinkTable *pLinkTable = pMenu->pMenuHead;
     if(pLinkTable->linkNodeSize == 0)
     {
         printf("There is no command.\n");
-        return -1;
+        return FAILURE;
     }
     printf("This is my command list:\n");
     tCmdNode *pThisCmdNode;
@@ -104,7 +111,7 @@ int ShowAllCommand(tMenu *pMenu)
         printf("\n");
         pThisCmdNode = (tCmdNode *)GetNextLinkNode(pLinkTable, (tLinkNode *)pThisCmdNode);
     }
-    return 0;
+    return SUCCESS;
 }
 
 /*print all commands and their functions on screen*/
@@ -112,12 +119,13 @@ int ShowAllInformation(tMenu *pMenu)
 {
     if(pMenu == NULL)
     {
-        return -1;
+        return FAILURE;
     }
     tLinkTable *pLinkTable = pMenu->pMenuHead;
     if(pLinkTable->linkNodeSize == 0)
     {
-        return -1;
+        printf("There is no command.\n");
+        return FAILURE;
     }
     tCmdNode *pThisCmdNode;
     pThisCmdNode = (tCmdNode *)GetLinkTableFirst(pLinkTable);
@@ -127,7 +135,7 @@ int ShowAllInformation(tMenu *pMenu)
         printf("%s-------%s\n", pThisCmdNode->cmd, pThisCmdNode->desc);
         pThisCmdNode = (tCmdNode *)GetNextLinkNode(pLinkTable, (tLinkNode *)pThisCmdNode);
     }
-    return 0;
+    return SUCCESS;
 }
 
 /*the condition of search the matched command*/
@@ -136,9 +144,9 @@ int InputCondition(tLinkNode *pLinkNode)
     tCmdNode *pNode = (tCmdNode *)pLinkNode;
     if(!strcmp(pNode->cmd, pInputCmd))
     {
-        return -1;  
+        return FAILURE;  
     }
-    return 0;	       
+    return SUCCESS;	       
 }
 
 /*start the menu program*/
@@ -180,11 +188,11 @@ int MenuStop(tMenu *pMenu)
 {
     if(pMenu == NULL)
     {
-        return -1;
+        return FAILURE;
     }
     printf("exit success!\n\n");
     out = 1;
-    return 0;
+    return SUCCESS;
 }
 
 /*the condition of delete the matched command*/
@@ -193,9 +201,9 @@ int DeleteCondition(tLinkNode *pLinkNode)
     tCmdNode *pNode = (tCmdNode *)pLinkNode;
     if(!strcmp(pNode->cmd, deleteCmd))
     {
-        return -1;
+        return FAILURE;
     }
-    return 0;
+    return SUCCESS;
 }
 
 /*delete command named pCommand*/
@@ -203,19 +211,19 @@ int DeleteCommand(tMenu *pMenu, char* pCommand)
 {
     if(pMenu == NULL || pCommand == NULL)
     {
-        return -1;
+        return FAILURE;
     }
     deleteCmd = pCommand;
     tLinkNode *pLinkNode = SearchLinkNode(pMenu->pMenuHead, DeleteCondition);
     if(!DeleteLinkNode(pMenu->pMenuHead, pLinkNode))
     {
         printf("Delete command (%s) success.\n", pCommand);
-        return 0;
+        return SUCCESS;
     }
     else
     {
         printf("Delete command (%s) failed.\n", pCommand);
-        return -1;
+        return FAILURE;
     }
 }
 
@@ -224,17 +232,17 @@ int DeleteMenu(tMenu *pMenu)
 {
     if(pMenu == NULL)
     {
-        return -1;
+        return FAILURE;
     }
     if(!DeleteLinkTable(pMenu->pMenuHead))
     {
         printf("Delete menu success!\n\n");
         free(pMenu);
-        return 0;
+        return SUCCESS;
     }
     else
     {
         printf("Delete menu failed!\n\n");
-        return -1;
+        return FAILURE;
     }
 }

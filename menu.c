@@ -34,16 +34,8 @@ struct Menu
 
 /*create a menu*/
 tMenu* CreateMenu()
-{    
+{
     tMenu *p = (tMenu *)malloc(sizeof(tMenu));
-    if(p == NULL)
-    {
-        printf("\nCreate menu fail.\n");
-    }
-    else
-    {
-        printf("\nCreate menu success~\n");
-    }
     return p;
 }
 
@@ -52,10 +44,9 @@ int AddCommand(tMenu *pMenu, char* pCommand, char* pDesc, int (*pOpt)())
 {
     if(pMenu == NULL || pCommand == NULL || pDesc == NULL)
     {
-        printf("\nAdd command %s fail.\n", pCommand);
         return FAILURE;
     }
-    printf("\nAdd command %s success~\n", pCommand);
+    printf("function...\n");
     return SUCCESS;   
 }
 
@@ -64,10 +55,9 @@ int ShowAllCommand(tMenu *pMenu)
 {
     if(pMenu == NULL)
     {
-        printf("\nShow all commands fail.\n");
         return FAILURE;
     }
-    printf("\nShow all commands success~\n");
+    printf("function...\n");
     return SUCCESS;   
 }
 
@@ -76,10 +66,9 @@ int ShowAllInformation(tMenu *pMenu)
 {
     if(pMenu == NULL)
     {
-        printf("\nShow all information fail.\n");
         return FAILURE;
     }
-    printf("\nShow all information success~\n");
+    printf("function...\n");
     return SUCCESS;
 }
 
@@ -94,7 +83,7 @@ void MenuStart(tMenu *pMenu)
             printf("\nMenu start fail.\n");
             break;
         }
-        printf("\nMenu start success~\n");
+        printf("function...\n");
         break;
     } 
 }
@@ -104,10 +93,9 @@ int MenuStop(tMenu *pMenu)
 {
     if(pMenu == NULL)
     {
-        printf("\nMenu stop fail.\n");
         return FAILURE;
     }
-    printf("\nMenu stop success~\n");
+    printf("function...\n");
     return SUCCESS;
 }
 
@@ -116,10 +104,9 @@ int DeleteCommand(tMenu *pMenu, char* pCommand)
 {
     if(pMenu == NULL || pCommand == NULL)
     {
-        printf("\nDelete command fail.\n");
         return FAILURE;
     }
-    printf("\nDelete command success~\n");
+    printf("function...\n");
     return SUCCESS;
 }
 
@@ -128,9 +115,8 @@ int DeleteMenu(tMenu *pMenu)
 {
     if(pMenu == NULL)
     {
-        printf("\nDelete menu fail.\n");
         return FAILURE;
     }
-    printf("\nDelete menu success~\n");
+    printf("function...\n");
     return SUCCESS;
 }

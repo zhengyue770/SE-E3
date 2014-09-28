@@ -21,7 +21,7 @@
 #include <stdio.h>
 #include "menu.h"
 
-#define debug
+#define debug printf
 #define FAILURE -1
 #define SUCCESS 0
 
@@ -29,7 +29,7 @@ int returnResult[21];
 
 char* info[22] =
 {
-    "==================================test report====================================",
+    "==================================retrun test report====================================",
     "TC1.1:   CreateMenu[]",
     "TC2.1:   AddCommand(null, null, null)",
     "TC2.2:   AddCommand(tMenu, null, null)",
@@ -67,98 +67,101 @@ int main()
 
     /*test return of CreateMenu()*/
     i = 0;
+    debug("\n\033[;32mTest function of create menu:\033[0m\n");
     tMenu *createMenu = CreateMenu();
     if(createMenu == NULL)
     {
-        debug("TC1.1 fail.\n");
+        debug("\nCreate menu fail.\n");
         returnResult[i++] = 1;
     }
     else
     {
-        debug("TC1.1 Success.\n");
+        debug("\nCreate menu success~\n");
         returnResult[i++]  = 0;
     }
 
     /*test return of AddCommand (does not matter the 4th parameter is null or not null)*/
+    debug("\n\033[;32mTest return of add command(no less than one null in parameters):\033[0m\n");
     char* pCommand = "Test";
     char* pDesc = "Testing...";  
     int addCmd = AddCommand(NULL, NULL, NULL, Help);
     if(addCmd != FAILURE)
     {
-        debug("TC2.1 success.\n");
+        debug("\nAdd command %s success.\n", pCommand);
         returnResult[i++] = 0;       
     }
     else
     {
-        debug("TC2.1 fail.\n");
+        debug("\nAdd command %s fail.\n", pCommand);
         i++;
     }   
     addCmd = AddCommand(createMenu, NULL, NULL, Help);
     if(addCmd != FAILURE)
     {
-        debug("TC2.2 success.\n");
+        debug("\nAdd command %s success.\n", pCommand);
         returnResult[i++] = 0;
     }
     else
     {
-        debug("TC2.2 fail.\n");
+        debug("\nAdd command %s fail.\n", pCommand);
         i++;
     }    
     addCmd = AddCommand(NULL, pCommand, NULL, Help);
     if(addCmd != FAILURE)
     {
-        debug("TC2.3 success.\n");
+        debug("\nAdd command %s success.\n", pCommand);
         returnResult[i++] = 0;
     }
     else
     {
-        debug("TC2.3 fail.\n");
+        debug("\nAdd command %s fail.\n", pCommand);
         i++;
     } 
     addCmd = AddCommand(NULL, NULL, pDesc, Help);
     if(addCmd != FAILURE)
     {
-        debug("TC2.4 success.\n");
+        debug("\nAdd command %s success.\n", pCommand);
         returnResult[i++] = 0;       
     }
     else
     {
-        debug("TC2.4 fail.\n");
+        debug("\nAdd command %s fail.\n", pCommand);
         i++;
     } 
     addCmd = AddCommand(createMenu, pCommand, NULL, Help);
     if(addCmd != FAILURE)
     {
-        debug("TC2.5 success.\n");
+        debug("\nAdd command %s success.\n", pCommand);
         returnResult[i++] = 0;       
     }
     else
     {
-        debug("TC2.5 fail.\n");
+        debug("\nAdd command %s fail.\n", pCommand);
         i++;
     } 
     addCmd = AddCommand(createMenu, NULL, pDesc, Help);
     if(addCmd != FAILURE)
     {
-        debug("TC2.6 success.\n");
+        debug("\nAdd command %s success.\n", pCommand);
         returnResult[i++] = 0;       
     }
     else
     {
-        debug("TC2.6 fail.\n");
+        debug("\nAdd command %s fail.\n", pCommand);
         i++;
     } 
     addCmd = AddCommand(NULL, pCommand, pDesc, Help);
     if(addCmd != FAILURE)
     {
-        debug("TC2.7 success.\n");
+        debug("\nAdd command %s success.\n", pCommand);
         returnResult[i++] = 0;       
     }
     else
     {
-        debug("TC2.7 fail.\n");
+        debug("\nAdd command %s fail.\n", pCommand);
         i++;
     } 
+    debug("\n\033[;32mTest function of add command(correct parameters):\033[0m\n");
     addCmd = AddCommand(createMenu, "cmdlist", "This command show all commands!", ShowAllCommand);
     AddCommand(createMenu, "help", "This command show you what all of these commands are use for!",
                ShowAllInformation);
@@ -166,164 +169,175 @@ int main()
     AddCommand(createMenu, "exit", "This command can exit menu!", MenuStop);
     if(addCmd == SUCCESS)
     {
-        debug("TC2.8 success.\n");
+        debug("\nAdd command %s success.\n", pCommand);
         returnResult[i++] = 0;       
     }
     else
     {
-        debug("TC2.3 fail.\n");
+        debug("\nAdd command %s fail.\n", pCommand);
         i++;
     } 
 
     /*test return of ShowAllCommand(tMenu *pMenu)*/
+    debug("\n\033[;32mTest return of show command(no less than one null in parameters):\033[0m\n");
     int showCmd = ShowAllCommand(NULL);
     if(showCmd != FAILURE)
     {
-        debug("TC3.1 success\n");
+        debug("\nShow all commands success.\n");
         returnResult[i++] = 0;
     }
     else
     {
-        debug("TC3.1 fail.\n");
+        debug("\nShow all commands fail.\n");
         i++;
-    } 
+    }
+    debug("\n\033[;32mTest function of show command(correct parameters):\033[0m\n");
     showCmd = ShowAllCommand(createMenu);
     if(showCmd == SUCCESS)
     {
-        debug("TC3.2 success\n");
+        debug("\nShow all commands success.\n");
         returnResult[i++] = 0;
     }
     else
     {
-        debug("TC3.2 fail.\n");
+        debug("\nShow all commands fail.\n");
         i++;
     }
  
     /*test return of ShowAllInformation(tMenu *pMenu)*/
+    debug("\n\033[;32mTest return of show information(no less than one null in parameters):\033[0m\n");
     int showInfo = ShowAllInformation(NULL);
     if(showInfo != FAILURE)
     {
-        debug("TC4.1 success.\n");
+        debug("\nShow all information success.\n");
         returnResult[i++] = 0;
     }
     else
     {
-        debug("TC4.1 fail.\n");
+        debug("\nShow all information fail.\n");
         i++;
     }
+    debug("\n\033[;32mTest function of show information(correct parameters):\033[0m\n");
     showInfo = ShowAllInformation(createMenu);
     if(showInfo == SUCCESS)
     {
-        debug("TC4.2 success.\n");
+        debug("\nShow all information success.\n");
         returnResult[i++] = 0;
     }
     else
     {
-        debug("TC4.2 fail.\n");
+        debug("\nShow all information fail.\n");
         i++;
     }
-
+    debug("\n\033[;32mTest function of menu start:\033[0m\n");
     MenuStart(createMenu);
 
     /*test return of MenuStop(tMenu *pMenu)*/
+    debug("\n\033[;32mTest return of menu stop(no less than one null in parameters):\033[0m\n");
     int menuStop = MenuStop(NULL);
     if(menuStop != FAILURE)
     {
-        debug("TC5.1 success.\n");
+        debug("\nmenu stop success.\n");
         returnResult[i++] = 0;
     }
     else
     {
-        debug("TC5.1 fail.\n");
+        debug("\nmenu stop fail.\n");
         i++;
     }
+    debug("\n\033[;32mTest function of menu stop(correct parameters):\033[0m\n");
     menuStop = MenuStop(createMenu);
     if(menuStop == SUCCESS)
     {
-        debug("TC5.2 success\n");
+        debug("\nmenu stop success.\n");
         returnResult[i++] = 0;
     }
     else
     {
-        debug("TC5.2 fail.\n");
+        debug("\nmenu stop fail.\n");
         i++;
     }
 
     /*test return of DeleteCommand(tMenu *pMenu, char* pCommand)*/
+    debug("\n\033[;32mTest return of delete command(no less than one null in parameters):\033[0m\n");
     int deleteCmd = DeleteCommand(NULL, NULL);
     if(deleteCmd != FAILURE)
     {
-        debug("TC6.1 success.\n");
+        debug("\nDelete command success.\n");
         returnResult[i++] = 0;
     }
     else
     {
-        debug("TC6.1 fail.\n");
+        debug("\nDelete command fail.\n");
         i++;
     }
     deleteCmd = DeleteCommand(NULL, pCommand);
     if(deleteCmd != FAILURE)
     {
-        debug("TC6.2 success\n");
+        debug("\nDelete command success.\n");
         returnResult[i++] = 0;
     }
     else
     {
-        debug("TC6.2 fail.\n");
+        debug("\nDelete command fail.\n");
         i++;
     }
     deleteCmd = DeleteCommand(createMenu, NULL);
     if(deleteCmd != FAILURE)
     {
-        debug("TC6.3 success.\n");
+        debug("\nDelete command success.\n");
         returnResult[i++] = 0;
     }
     else
     {
-        debug("TC6.3 fail.\n");
+        debug("\nDelete command fail.\n");
         i++;
     }
-    deleteCmd = DeleteCommand(createMenu, "version");;
+    debug("\n\033[;32mTest function of delete command(correct parameters):\033[0m\n");
+    deleteCmd = DeleteCommand(createMenu, "version");
     if(deleteCmd == SUCCESS)
     {
-        debug("TC6.4 success\n");
+        debug("\nDelete command success.\n");
         returnResult[i++] = 0;
-        
     }
     else
     {
-        debug("TC6.4 fail.\n");
+        debug("\nDelete command fail.\n");
         i++;
     }
+    debug("\n\033[;32mShow all command information after deleting command:\033[0m\n");
     ShowAllInformation(createMenu);
 
     /*test return of DeleteMenu(tMenu *pMenu)*/
+    debug("\n\033[;32mTest return of delete menu(no less than one null in parameters):\033[0m\n");
     int deleteMenu = DeleteMenu(NULL);
     if(deleteMenu != FAILURE)
     {
-        debug("TC7.1 success.\n");
+        debug("\nDelete menu success.\n");
         returnResult[i++] = 0;
     }
     else
     {
-        debug("TC7.1 fail.\n");
+        debug("\nDelete menu fail.\n");
         i++;
     }
+    debug("\n\033[;32mTest function of delete menu(correct parameters):\033[0m\n");
     deleteMenu = DeleteMenu(createMenu);
     if(deleteMenu == SUCCESS)
     {
-        debug("TC7.2 success\n");
+        debug("\nDelete menu success.\n");
         returnResult[i++] = 0;
     }
     else
     {
-        debug("TC7.2 fail.\n");
+        debug("\nDelete menu fail.\n");
         i++;
     }
+    debug("\n\033[;32mShow all command information after deleting menu:\033[0m\n");
     ShowAllInformation(createMenu);
 
     /*print the result*/
-    printf("\n%s\n", info[0]);
+    printf("\n\033[;32m%s\033[0m\n", info[0]);
     for(i = 0; i < 21; i++)
     {
         if(returnResult[i] == 1)
@@ -335,7 +349,7 @@ int main()
             printf("Testcase %s\n%s\n\n", info[i+1], "Success");
         }
     }
-    printf("%s\n", info[0]);
+    printf("\033[;32m%s\033[0m\n", info[0]);
     return 0;
 }
 

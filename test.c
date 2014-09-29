@@ -26,8 +26,9 @@
 #define SUCCESS 0
 
 int returnResult[21];
+char* result[21];
 
-char* info[22] =
+char* info[23] =
 {
     "==================================retrun test report====================================",
     "TC1.1:   CreateMenu[]",
@@ -50,7 +51,8 @@ char* info[22] =
     "TC6.3:   DeleteCommand(tMenu, null)",
     "TC6.4:   DeleteCommand(tMenu, char*)",
     "TC7.1:   DeleteMenu(null)",
-    "TC7.2:   DeleteMenu(tMenu)"
+    "TC7.2:   DeleteMenu(tMenu)",
+    "======================================Test Result======================================="
 };
 
 int Help();
@@ -63,6 +65,7 @@ int main()
     for(i = 0; i < 21; i++)
     {
         returnResult[i] = 1;
+        result[i] = "Not pass";
     }
 
     /*test return of CreateMenu()*/
@@ -77,6 +80,7 @@ int main()
     else
     {
         debug("\nCreate menu success~\n");
+        result[i] = "Pass";
         returnResult[i++]  = 0;
     }
 
@@ -93,6 +97,7 @@ int main()
     else
     {
         debug("\nAdd command %s fail.\n", pCommand);
+        result[i] = "Pass";
         i++;
     }   
     addCmd = AddCommand(createMenu, NULL, NULL, Help);
@@ -104,6 +109,7 @@ int main()
     else
     {
         debug("\nAdd command %s fail.\n", pCommand);
+        result[i] = "Pass";
         i++;
     }    
     addCmd = AddCommand(NULL, pCommand, NULL, Help);
@@ -115,6 +121,7 @@ int main()
     else
     {
         debug("\nAdd command %s fail.\n", pCommand);
+        result[i] = "Pass";
         i++;
     } 
     addCmd = AddCommand(NULL, NULL, pDesc, Help);
@@ -126,6 +133,7 @@ int main()
     else
     {
         debug("\nAdd command %s fail.\n", pCommand);
+        result[i] = "Pass";
         i++;
     } 
     addCmd = AddCommand(createMenu, pCommand, NULL, Help);
@@ -137,6 +145,7 @@ int main()
     else
     {
         debug("\nAdd command %s fail.\n", pCommand);
+        result[i] = "Pass";
         i++;
     } 
     addCmd = AddCommand(createMenu, NULL, pDesc, Help);
@@ -148,6 +157,7 @@ int main()
     else
     {
         debug("\nAdd command %s fail.\n", pCommand);
+        result[i] = "Pass";
         i++;
     } 
     addCmd = AddCommand(NULL, pCommand, pDesc, Help);
@@ -159,6 +169,7 @@ int main()
     else
     {
         debug("\nAdd command %s fail.\n", pCommand);
+        result[i] = "Pass";
         i++;
     } 
     debug("\n\033[;32mTest function of add command(correct parameters):\033[0m\n");
@@ -170,6 +181,7 @@ int main()
     if(addCmd == SUCCESS)
     {
         debug("\nAdd command %s success.\n", pCommand);
+        result[i] = "Pass";
         returnResult[i++] = 0;       
     }
     else
@@ -189,6 +201,7 @@ int main()
     else
     {
         debug("\nShow all commands fail.\n");
+        result[i] = "Pass";
         i++;
     }
     debug("\n\033[;32mTest function of show command(correct parameters):\033[0m\n");
@@ -196,6 +209,7 @@ int main()
     if(showCmd == SUCCESS)
     {
         debug("\nShow all commands success.\n");
+        result[i] = "Pass";
         returnResult[i++] = 0;
     }
     else
@@ -215,6 +229,7 @@ int main()
     else
     {
         debug("\nShow all information fail.\n");
+        result[i] = "Pass";
         i++;
     }
     debug("\n\033[;32mTest function of show information(correct parameters):\033[0m\n");
@@ -222,6 +237,7 @@ int main()
     if(showInfo == SUCCESS)
     {
         debug("\nShow all information success.\n");
+        result[i] = "Pass";
         returnResult[i++] = 0;
     }
     else
@@ -243,6 +259,7 @@ int main()
     else
     {
         debug("\nmenu stop fail.\n");
+        result[i] = "Pass";
         i++;
     }
     debug("\n\033[;32mTest function of menu stop(correct parameters):\033[0m\n");
@@ -250,6 +267,7 @@ int main()
     if(menuStop == SUCCESS)
     {
         debug("\nmenu stop success.\n");
+        result[i] = "Pass";
         returnResult[i++] = 0;
     }
     else
@@ -269,6 +287,7 @@ int main()
     else
     {
         debug("\nDelete command fail.\n");
+        result[i] = "Pass";
         i++;
     }
     deleteCmd = DeleteCommand(NULL, pCommand);
@@ -280,6 +299,7 @@ int main()
     else
     {
         debug("\nDelete command fail.\n");
+        result[i] = "Pass";
         i++;
     }
     deleteCmd = DeleteCommand(createMenu, NULL);
@@ -291,6 +311,7 @@ int main()
     else
     {
         debug("\nDelete command fail.\n");
+        result[i] = "Pass";
         i++;
     }
     debug("\n\033[;32mTest function of delete command(correct parameters):\033[0m\n");
@@ -298,6 +319,7 @@ int main()
     if(deleteCmd == SUCCESS)
     {
         debug("\nDelete command success.\n");
+        result[i] = "Pass";
         returnResult[i++] = 0;
     }
     else
@@ -319,6 +341,7 @@ int main()
     else
     {
         debug("\nDelete menu fail.\n");
+        result[i] = "Pass";
         i++;
     }
     debug("\n\033[;32mTest function of delete menu(correct parameters):\033[0m\n");
@@ -326,6 +349,7 @@ int main()
     if(deleteMenu == SUCCESS)
     {
         debug("\nDelete menu success.\n");
+        result[i] = "Pass";
         returnResult[i++] = 0;
     }
     else
@@ -349,13 +373,17 @@ int main()
             printf("Testcase %s\n%s\n\n", info[i+1], "Success");
         }
     }
-    printf("\033[;32m%s\033[0m\n", info[0]);
+    printf("\n\033[;32m%s\033[0m\n", info[22]);
+    for(i = 0; i < 21; i++)
+    {
+        printf("Testcase %s: %s\n\n", info[i+1], result[i]);
+    }
     return 0;
 }
 
 int GetVersion(tMenu *pMenu)
 {
-    printf("Version: v1.2\n");
+    printf("Version: v3.1\n");
     return 0;
 }
 

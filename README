@@ -1,0 +1,19 @@
+
+	This program includes two test stubs. One is menu.c, another is menufunction.c. 
+	menu.c is a test stub that is non-functional, but menufunction.c is functional.
+
+Build Procedure:
+	
+	You can use "make" to compile menu.c and test.c                          
+	$ make
+
+	You can use "make exp2" to compile menufunction.c test.c and linkTable.c 
+	$ make exp2
+	
+	You can use "make run" to run test.c
+	$ make run
+
+	You can use "make clean" to clean all .o file
+	$ make clean
+
+Thank you!

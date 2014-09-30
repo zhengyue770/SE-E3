@@ -219,7 +219,8 @@ int main()
     }
  
     /*test return of ShowAllInformation(tMenu *pMenu)*/
-    debug("\n\033[;32mTest return of show information(no less than one null in parameters):\033[0m\n");
+    debug
+    ("\n\033[;32mTest return of show information(no less than one null in parameters):\033[0m\n");
     int showInfo = ShowAllInformation(NULL);
     if(showInfo != FAILURE)
     {
@@ -277,7 +278,8 @@ int main()
     }
 
     /*test return of DeleteCommand(tMenu *pMenu, char* pCommand)*/
-    debug("\n\033[;32mTest return of delete command(no less than one null in parameters):\033[0m\n");
+    debug
+    ("\n\033[;32mTest return of delete command(no less than one null in parameters):\033[0m\n");
     int deleteCmd = DeleteCommand(NULL, NULL);
     if(deleteCmd != FAILURE)
     {
